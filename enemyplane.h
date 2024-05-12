@@ -11,10 +11,9 @@ public:
     void updatePosition();
 
 public:
-    //敌机资源对象
+
     QPixmap m_enemy;
 
-    //位置
     int m_X,m_Y;
 
     //敌机的矩形边框（碰撞检测）

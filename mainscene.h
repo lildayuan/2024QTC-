@@ -7,6 +7,7 @@
 #include"map.h"
 #include<QMouseEvent>
 #include"enemyplane.h"
+#include"bomb.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -21,13 +22,13 @@ class MainScene : public QWidget
 public:
     MainScene(QWidget *parent = nullptr);
     ~MainScene();
-    void  initScene();//初始化场景
+    void initScene();//初始化场景
 
     void playGame();
 
     void updatePosition();
 
-    void paintEvent(QPaintEvent *);
+    void paintEvent(QPaintEvent *event);
 
     void mouseMoveEvent(QMouseEvent *);
 
@@ -44,6 +45,8 @@ public:
     HeroPlane m_hero;
 
     QTimer m_Timer;
+
+    Bomb m_bombs[BOMB_NUM];
 
 
 

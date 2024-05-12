@@ -28,6 +28,8 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         heroplane.h heroplane.cpp
         bullet.h bullet.cpp
         enemyplane.h enemyplane.cpp
+        bomb.h bomb.cpp
+
 
 
 

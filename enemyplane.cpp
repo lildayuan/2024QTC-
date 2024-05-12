@@ -1,5 +1,6 @@
 #include "enemyplane.h"
-#include"config.h"
+#include "config.h"
+
 EnemyPlane::EnemyPlane()
 {
     //敌机资源加载
@@ -32,9 +33,8 @@ void EnemyPlane::updatePosition()
     m_Y += m_Speed;
     m_Rect.moveTo(m_X,m_Y);
 
-    if(m_Y >= GAME_HEIGHT + m_Rect.height())
+    if(m_Y >= GAME_HEIGHT)
     {
         m_Free = true;
     }
 }
-
