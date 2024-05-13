@@ -3,6 +3,7 @@
 
 #include <QWidget>
 #include <QTimer>
+#include<QMessageBox>
 #include"heroplane.h"
 #include"map.h"
 #include<QMouseEvent>
@@ -35,6 +36,10 @@ public:
     void enemyToScene();
 
     void collisionDetection();
+
+    void startGame();
+
+    void GameOver();
 
     EnemyPlane m_enemys[ENEMY_NUM];
 

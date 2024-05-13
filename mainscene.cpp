@@ -5,13 +5,14 @@
 #include<QPainter>
 #include<ctime>
 #include<QMouseEvent>
+#include <QMessageBox>
+
 
 MainScene::MainScene(QWidget *parent)
     : QWidget(parent)
     , ui(new Ui::MainScene)
 {
     ui->setupUi(this);
-    initScene();
 
 }
 
@@ -19,6 +20,13 @@ MainScene::~MainScene()
 {
     delete ui;
 }
+
+void MainScene::startGame()
+{
+    initScene();
+    playGame();
+}
+
 
 void MainScene::initScene()
 {
@@ -29,8 +37,6 @@ void MainScene::initScene()
     setWindowIcon(QIcon(GAME_ICON));
 
     m_Timer.setInterval(GAME_RATE);
-
-    playGame();
 
     m_recorder = 0;
 
@@ -101,8 +107,8 @@ void MainScene::paintEvent(QPaintEvent *event)
 
 void MainScene::mouseMoveEvent(QMouseEvent *event)
 {
-    int x = event->x() - m_hero.m_Rect.width()*0.5;
-    int y = event->y() - m_hero.m_Rect.height()*0.5;
+    int x = event->position().x() - m_hero.m_Rect.width()*0.5;
+    int y = event->position().y() - m_hero.m_Rect.height()*0.5;
 
 
     //边界检测
@@ -146,12 +152,19 @@ void MainScene::enemyToScene()
     }
 }
 
+
 void MainScene::collisionDetection()
 {
     for(int i = 0 ; i < ENEMY_NUM; i++)
     {
         if(m_enemys[i].m_Free)
             continue;
+
+        // 检测英雄飞机与敌机的碰撞
+        if(m_hero.m_Rect.intersects(m_enemys[i].m_Rect)) {
+            GameOver();  // 调用游戏结束方法
+            return;      // 碰撞后结束检测
+        }
 
         for(int j = 0 ; j < BULLET_NUM; j++)
         {
@@ -178,4 +191,10 @@ void MainScene::collisionDetection()
             }
         }
     }
+}
+
+void MainScene::GameOver()
+{
+    QMessageBox::information(this, "游戏结束", "怎么被碰到了呢 \n    你没了啊");
+    QApplication::quit();
 }
