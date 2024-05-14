@@ -5,6 +5,7 @@
         <file>res/111cc1326b2aa0ae2171f8897d65b3e.jpg</file>
         <file>res/app.ico</file>
         <file>res/ba935b763cd18d5169a15cd552533a7.jpg</file>
+        <file>res/begin.mp3</file>
         <file>res/bg.wav</file>
         <file>res/bomb.wav</file>
         <file>res/bomb-1.png</file>
@@ -28,10 +29,12 @@
         <file>res/bullet_12.png</file>
         <file>res/bullet_13.png</file>
         <file>res/bullet_14.png</file>
+        <file>res/Defeated.wav</file>
         <file>res/game.ico</file>
         <file>res/hero.png</file>
         <file>res/hero_bullet_7.png</file>
         <file>res/hero2.png</file>
+        <file>res/heroplane.png</file>
         <file>res/img_bg_level_1.jpg</file>
         <file>res/img_bg_level_2.jpg</file>
         <file>res/img_bg_level_3.jpg</file>
@@ -44,5 +47,6 @@
         <file>res/img-plane_5.png</file>
         <file>res/img-plane_6.png</file>
         <file>res/img-plane_7.png</file>
+        <file>res/start.jpg</file>
     </qresource>
 </RCC>

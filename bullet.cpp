@@ -1,5 +1,4 @@
 #include "bullet.h"
-#include<QDebug>
 
 Bullet::Bullet():justFreed(false)
 {

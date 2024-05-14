@@ -14,6 +14,12 @@ public:
     StartWindow(QWidget *parent = nullptr);
     ~StartWindow();
     MainScene gameScene;
+
+    QPixmap m_start;
+
+    int m_start_Y;
+
+    void paintEvent(QPaintEvent *event);
 signals:
     void startGame();
     void quitGame();

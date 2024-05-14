@@ -5,6 +5,8 @@ HeroPlane::HeroPlane()
 {
     m_Plane.load(HERO_PATH);
 
+    m_Plane = m_Plane.scaled(90, 90, Qt::KeepAspectRatio);
+
     //初始化坐标
     m_X = GAME_WIDTH * 0.5 - m_Plane.width() *0.5;
     m_Y = GAME_HEIGHT - m_Plane.height() - 100;

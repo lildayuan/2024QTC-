@@ -9,6 +9,7 @@
 #include<QMouseEvent>
 #include"enemyplane.h"
 #include"bomb.h"
+#include "qmediaplayer.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -52,7 +53,6 @@ public:
     QTimer m_Timer;
 
     Bomb m_bombs[BOMB_NUM];
-
 
 
 

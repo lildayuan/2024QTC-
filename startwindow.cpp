@@ -1,11 +1,21 @@
 #include "startwindow.h"
 #include "config.h"
 #include "mainscene.h"
-#include<QApplication>
+#include <QApplication>
+#include <QPainter>
+#include <QPaintEvent>
+
 
 StartWindow::StartWindow(QWidget *parent) : QWidget(parent) {
     setFixedSize(GAME_WIDTH, GAME_HEIGHT);
-    setWindowTitle("飞机荣耀 - 开始界面");
+    setWindowTitle("科幻风飞机大战 - 开始界面");
+    m_start.load(Startpicture_Path);
+
+
+
+    m_start_Y = 0;
+
+
 
     QPushButton *startButton = new QPushButton("开始游戏", this);
     QPushButton *quitButton = new QPushButton("退出游戏", this);
@@ -39,9 +49,19 @@ StartWindow::StartWindow(QWidget *parent) : QWidget(parent) {
     connect(startButton, &QPushButton::clicked, &gameScene, &MainScene::startGame);
     connect(startButton, &QPushButton::clicked, &gameScene, &QWidget::show);
     connect(startButton, &QPushButton::clicked, this, &QWidget::hide);
-
     connect(quitButton, &QPushButton::clicked, this, &QApplication::quit);
+
+    update();
 }
 
 StartWindow::~StartWindow() {}
+
+void StartWindow::paintEvent(QPaintEvent *event) {
+    QPainter painter(this);
+
+    QPixmap scaledPixmap = m_start.scaled(this->size(), Qt::KeepAspectRatio);
+    painter.drawPixmap(0, 0, scaledPixmap);
+
+    }
+
 

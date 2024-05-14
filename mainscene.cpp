@@ -6,7 +6,7 @@
 #include<ctime>
 #include<QMouseEvent>
 #include <QMessageBox>
-
+#include<QResource>
 
 MainScene::MainScene(QWidget *parent)
     : QWidget(parent)
@@ -14,7 +14,11 @@ MainScene::MainScene(QWidget *parent)
 {
     ui->setupUi(this);
 
-}
+   QResource::registerResource(GAME_RES_PATH) ;
+
+    }
+
+
 
 MainScene::~MainScene()
 {
@@ -25,6 +29,7 @@ void MainScene::startGame()
 {
     initScene();
     playGame();
+
 }
 
 
@@ -160,10 +165,9 @@ void MainScene::collisionDetection()
         if(m_enemys[i].m_Free)
             continue;
 
-        // 检测英雄飞机与敌机的碰撞
         if(m_hero.m_Rect.intersects(m_enemys[i].m_Rect)) {
-            GameOver();  // 调用游戏结束方法
-            return;      // 碰撞后结束检测
+            GameOver();
+            return;
         }
 
         for(int j = 0 ; j < BULLET_NUM; j++)
@@ -176,16 +180,15 @@ void MainScene::collisionDetection()
                 m_enemys[i].m_Free = true;
                 m_hero.m_bullets[j].m_Free = true;
 
-                // 触发爆炸
                 for(int k = 0 ; k < BOMB_NUM; k++)
                 {
                     if(m_bombs[k].m_Free)
                     {
+
                         m_bombs[k].m_Free = false;
                         m_bombs[k].m_X = m_enemys[i].m_X;
                         m_bombs[k].m_Y = m_enemys[i].m_Y;
-                        m_bombs[k].m_index = 0;  // 重置动画帧索引
-                        break;
+                        m_bombs[k].m_index = 0;  // 重置动画帧索引                        break;
                     }
                 }
             }
@@ -195,6 +198,6 @@ void MainScene::collisionDetection()
 
 void MainScene::GameOver()
 {
-    QMessageBox::information(this, "游戏结束", "怎么被碰到了呢 \n    你没了啊");
+    QMessageBox::information(this, "DEFEATED", "怎么就被碰到了呢 \n     你没了啊");
     QApplication::quit();
 }

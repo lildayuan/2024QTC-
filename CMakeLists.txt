@@ -9,46 +9,35 @@ set(CMAKE_AUTORCC ON)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
+# 查找必要的 Qt 模块
 find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Widgets Multimedia)
 find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets Multimedia)
 
-
+# 添加项目源文件
 set(PROJECT_SOURCES
-        main.cpp
-        mainscene.cpp
-        mainscene.h
-        mainscene.ui
+    main.cpp
+    mainscene.cpp
+    mainscene.h
+    mainscene.ui
+    config.h
+    map.h map.cpp
+    heroplane.h heroplane.cpp
+    bullet.h bullet.cpp
+    enemyplane.h enemyplane.cpp
+    bomb.h bomb.cpp
+    startwindow.h startwindow.cpp
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
     qt_add_executable(planewar01
         MANUAL_FINALIZATION
         ${PROJECT_SOURCES}
-        config.h
-        map.h map.cpp
-        heroplane.h heroplane.cpp
-        bullet.h bullet.cpp
-        enemyplane.h enemyplane.cpp
-        bomb.h bomb.cpp
-        startwindow.h startwindow.cpp
-
-
-
-
-
-
     )
-# Define target properties for Android with Qt 6 as:
-#    set_property(TARGET planewar01 APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR
-#                 ${CMAKE_CURRENT_SOURCE_DIR}/android)
-# For more information, see https://doc.qt.io/qt-6/qt-add-executable.html#target-creation
 else()
     if(ANDROID)
         add_library(planewar01 SHARED
             ${PROJECT_SOURCES}
         )
-# Define properties for Android with Qt 5 after find_package() calls as:
-#    set(ANDROID_PACKAGE_SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/android")
     else()
         add_executable(planewar01
             ${PROJECT_SOURCES}
@@ -56,11 +45,10 @@ else()
     endif()
 endif()
 
+# 链接必要的 Qt 模块
 target_link_libraries(planewar01 PRIVATE Qt${QT_VERSION_MAJOR}::Widgets Qt${QT_VERSION_MAJOR}::Multimedia)
 
-# Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.
-# If you are developing for iOS or macOS you should consider setting an
-# explicit, fixed bundle identifier manually though.
+# 设置目标属性
 if(${QT_VERSION} VERSION_LESS 6.1.0)
   set(BUNDLE_ID_OPTION MACOSX_BUNDLE_GUI_IDENTIFIER com.example.planewar01)
 endif()
@@ -72,6 +60,7 @@ set_target_properties(planewar01 PROPERTIES
     WIN32_EXECUTABLE TRUE
 )
 
+# 安装目标
 include(GNUInstallDirs)
 install(TARGETS planewar01
     BUNDLE DESTINATION .
